@@ -98,7 +98,9 @@ const std::string ask_llm(const std::string &llm_model,
 }
 
 int main() {
-  crow::SimpleApp App;
+  crow::App<crow::CORSHandler> App;
+
+  App.get_middleware<crow::CORSHandler>().global().origin("*");
 
   CROW_ROUTE(App, "/api/ping")([]() { return "pong!"; });
 
